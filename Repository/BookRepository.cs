@@ -41,5 +41,20 @@ namespace Book_api_core.Repository
                                         }).FirstOrDefaultAsync();
             return book;
         }
+
+        public async Task<int> CreateBook(CreateBookDto model)
+        {
+            var book = new Book()
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Amount = model.Amount,
+            };
+
+            _context.Add(book);
+            await _context.SaveChangesAsync();
+
+            return book.Id;
+        }
     }
 }

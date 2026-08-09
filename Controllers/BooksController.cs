@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Book_api_core.Interfaces;
+using Book_api_core.Models;
 using Book_api_core.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -42,6 +43,13 @@ namespace Book_api_core.Controllers
                 return NotFound();
             }
             return Ok(book);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCD([FromBody] CreateBookDto model)
+        {
+            var id = await _bookRepository.CreateBook(model);
+            return Ok(id);
         }
     }
 }

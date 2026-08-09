@@ -8,5 +8,6 @@ namespace Book_api_core.Interfaces
     {
         Task<List<BookDetailsDto>> GetAllBooks();
         Task<BookDetailsDto> GetBookDetailsById(int id);
+        Task<int> CreateBook(CreateBookDto model);
     }
 }
