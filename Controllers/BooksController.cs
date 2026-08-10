@@ -46,10 +46,22 @@ namespace Book_api_core.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCD([FromBody] CreateBookDto model)
+        public async Task<IActionResult> CreateBook([FromBody] CreateBookDto model)
         {
             var id = await _bookRepository.CreateBook(model);
             return Ok(id);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBook([FromBody] UpdateBookDto model, int id)
+        {
+            var result = await _bookRepository.UpdateBook(id, model);
+
+            if (!result)
+            {
+                return NotFound("You entered wrong id!");
+            }
+            return Ok(result);
         }
     }
 }
