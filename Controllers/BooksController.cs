@@ -63,5 +63,16 @@ namespace Book_api_core.Controllers
             }
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoveBook(int id)
+        {
+            var result = await _bookRepository.RemoveBook(id);
+            if (!result)
+            {
+                return NotFound("You entered wrong id!");
+            }
+            return Ok(result);
+        }
     }
 }

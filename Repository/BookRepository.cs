@@ -70,5 +70,17 @@ namespace Book_api_core.Repository
             }
             return false;
         }
+
+        public async Task<bool> RemoveBook(int id)
+        {
+            var book = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
+            if (book != null)
+            {
+                _context.Remove(book);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
     }
 }
