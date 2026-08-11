@@ -19,26 +19,28 @@ namespace Book_api_core.Repository
 
         public async Task<List<BookDetailsDto>> GetAllBooks()
         {
-            var books = await _context.Books.Select(x => new BookDetailsDto
-            {
-                Id = x.Id,
-                Description = x.Description,
-                Title = x.Title,
-                Amount = x.Amount
-            }).ToListAsync();
+            var books = await _context.Books.AsNoTracking()
+                                            .Select(x => new BookDetailsDto
+                                            {
+                                                Id = x.Id,
+                                                Description = x.Description,
+                                                Title = x.Title,
+                                                Amount = x.Amount
+                                            }).ToListAsync();
             return books;
         }
 
         public async Task<BookDetailsDto> GetBookDetailsById(int id)
         {
-            var book = await _context.Books.Where(x => x.Id == id)
-                                        .Select(x => new BookDetailsDto
-                                        {
-                                            Id = x.Id,
-                                            Description = x.Description,
-                                            Title = x.Title,
-                                            Amount = x.Amount
-                                        }).FirstOrDefaultAsync();
+            var book = await _context.Books.AsNoTracking()
+                                            .Where(x => x.Id == id)
+                                            .Select(x => new BookDetailsDto
+                                            {
+                                                Id = x.Id,
+                                                Description = x.Description,
+                                                Title = x.Title,
+                                                Amount = x.Amount
+                                            }).FirstOrDefaultAsync();
             return book;
         }
 
@@ -59,7 +61,7 @@ namespace Book_api_core.Repository
 
         public async Task<bool> UpdateBook(int id, UpdateBookDto model)
         {
-            var book = await _context.Books.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var book = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
             if (book != null)
             {
                 book.Title = model.Title;
