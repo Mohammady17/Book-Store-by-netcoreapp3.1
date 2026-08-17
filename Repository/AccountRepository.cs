@@ -1,6 +1,8 @@
+using Book_api_core.Interfaces;
+
 namespace Book_api_core.Repository
 {
-    public class AccountRepository
+    public class AccountRepository : IAccountRepository
     {
         
     }
