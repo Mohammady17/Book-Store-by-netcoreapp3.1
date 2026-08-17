@@ -8,6 +8,8 @@ using Book_api_core.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,10 @@ namespace Book_api_core
         {
             services.AddDbContext<BookStoreContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("BookStoreConnectionString")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<BookStoreContext>()
+                    .AddDefaultTokenProviders();
 
             services.AddControllers();
 
