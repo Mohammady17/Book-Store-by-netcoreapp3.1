@@ -9,7 +9,7 @@ namespace Book_api_core.Validations
         {
             BanKeywords = new List<string>()
             {
-                "shit", "fuck"
+                "shit"
             };
         }
         public List<string> BanKeywords { get; set; }
