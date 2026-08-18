@@ -29,5 +29,17 @@ namespace Book_api_core.Controllers
             }
             return BadRequest(user.Errors.Select(x => x.Description));
         }
+
+        [HttpPut("signup")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto model)
+        {
+            var user = await _accountRepository.ChangePassword(model);
+
+            if (user.Succeeded)
+            {
+                return Ok();
+            }
+            return BadRequest(user.Errors.Select(x => x.Description));
+        }
     }
 }

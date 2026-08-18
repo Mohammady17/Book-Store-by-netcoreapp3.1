@@ -7,5 +7,6 @@ namespace Book_api_core.Interfaces
     public interface IAccountRepository
     {
         Task<IdentityResult> SignUp(SignUpDto signUpDto);
+        Task<IdentityResult> ChangePassword(ChangePasswordDto model);
     }
 }

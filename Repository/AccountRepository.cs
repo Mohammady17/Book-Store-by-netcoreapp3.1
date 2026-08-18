@@ -27,5 +27,12 @@ namespace Book_api_core.Repository
 
             return await _userManager.CreateAsync(user, signUpDto.Password);
         }
+
+        public async Task<IdentityResult> ChangePassword(ChangePasswordDto model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            return await _userManager.ChangePasswordAsync(user,
+                                        model.CurrentPassword, model.NewPassword);
+        }
     }
 }
